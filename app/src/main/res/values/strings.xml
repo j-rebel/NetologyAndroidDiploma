@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">AppDiploma</string>
+    <string name="app_name">Diploma</string>
     <string name="status_planned">Planned</string>
     <string name="status_overdued">Overdued</string>
     <string name="status_today">Today</string>
     <string name="status_no">No deadline</string>
+    <string name="note_add_title">Add new note:</string>
+    <string name="note_update_title">Update or delete note:</string>
+    <string name="hint_title">Enter note title</string>
+    <string name="hint_text">Enter note text</string>
+    <string name="checkbox_deadline">Has deadline</string>
+    <string name="field_deadline">Click to modify</string>
+    <string name="no_title_or_text">Title or text should be filled</string>
 </resources>

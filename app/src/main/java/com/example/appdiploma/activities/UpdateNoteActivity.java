@@ -50,9 +50,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_update);
 
 
-        editTextTitle = findViewById(R.id.editTextTitle);
-        editTextDesc = findViewById(R.id.editTextDesc);
-        editTextFinishBy = findViewById(R.id.editTextFinishBy);
+        editTextTitle = findViewById(R.id.title);
+        editTextDesc = findViewById(R.id.text);
+        editTextFinishBy = findViewById(R.id.date);
         editTextFinishBy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
