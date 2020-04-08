@@ -36,19 +36,26 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
         holder.textViewDesc.setText(n.getText());
         if(n.getYear() == 0) {
             holder.textViewFinishBy.setText("");
+            holder.textViewFinishBy.setVisibility(View.GONE);
+            holder.textViewStatus.setText(mCtx.getString(R.string.status_no));
+            holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorGray));
         } else {
-            holder.textViewFinishBy.setText(n.getYear() + "/" + (n.getMonth() + 1) + "/" + n.getDay());
-        }
-        switch (n.getState()) {
-            case 1:
-                holder.textViewStatus.setText("Future");
-                break;
-            case 0:
-                holder.textViewStatus.setText("Soon");
-                break;
-            case -1:
-                holder.textViewStatus.setText("Overdued");
-                break;
+            String dateToDisplay = n.getYear() + "/" + (n.getMonth() + 1) + "/" + n.getDay();
+            holder.textViewFinishBy.setText(dateToDisplay);
+            switch (n.getState()) {
+                case 1:
+                    holder.textViewStatus.setText(mCtx.getString(R.string.status_planned));
+                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorGreen));
+                    break;
+                case 0:
+                    holder.textViewStatus.setText(mCtx.getString(R.string.status_today));
+                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorYellow));
+                    break;
+                case -1:
+                    holder.textViewStatus.setText(mCtx.getString(R.string.status_overdued));
+                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorRed));
+                    break;
+            }
         }
     }
 
@@ -64,10 +71,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
         public TasksViewHolder(View itemView) {
             super(itemView);
 
-            textViewStatus = itemView.findViewById(R.id.textViewStatus);
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewDesc = itemView.findViewById(R.id.textViewDesc);
-            textViewFinishBy = itemView.findViewById(R.id.textViewDate);
+            textViewStatus = itemView.findViewById(R.id.status);
+            textViewTitle = itemView.findViewById(R.id.title);
+            textViewDesc = itemView.findViewById(R.id.text);
+            textViewFinishBy = itemView.findViewById(R.id.date);
 
 
             itemView.setOnClickListener(this);

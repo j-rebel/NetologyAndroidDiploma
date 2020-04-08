@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AppDiploma</string>
+    <string name="status_planned">Planned</string>
+    <string name="status_overdued">Overdued</string>
+    <string name="status_today">Today</string>
+    <string name="status_no">No deadline</string>
 </resources>
