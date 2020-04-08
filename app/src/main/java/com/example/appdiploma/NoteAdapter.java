@@ -33,7 +33,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
     public void onBindViewHolder(TasksViewHolder holder, int position) {
         Note n = noteList.get(position);
         holder.textViewTitle.setText(n.getTitle());
+        if (n.getTitle().isEmpty()) {
+            holder.textViewTitle.setVisibility(View.GONE);
+        }
         holder.textViewDesc.setText(n.getText());
+        if (n.getText().isEmpty()) {
+            holder.textViewDesc.setVisibility(View.GONE);
+        }
         if(n.getYear() == 0) {
             holder.textViewFinishBy.setText("");
             holder.textViewFinishBy.setVisibility(View.GONE);

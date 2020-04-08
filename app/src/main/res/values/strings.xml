@@ -11,4 +11,5 @@
     <string name="checkbox_deadline">Has deadline</string>
     <string name="field_deadline">Click to modify</string>
     <string name="no_title_or_text">Title or text should be filled</string>
+    <string name="new_note_added">New note added!</string>
 </resources>

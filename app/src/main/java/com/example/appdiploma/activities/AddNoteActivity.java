@@ -101,7 +101,6 @@ public class AddNoteActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                //creating a task
                 if (finishBy.isEmpty()) {
                     myYear = 0;
                     myMonth = 0;
@@ -109,7 +108,6 @@ public class AddNoteActivity extends AppCompatActivity {
                 }
                 Note note = new Note(title, text, myYear, myMonth, myDay);
 
-                //adding to database
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .noteDAO()
                         .insert(note);
@@ -121,7 +119,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 finish();
                 startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
             }
         }
 
