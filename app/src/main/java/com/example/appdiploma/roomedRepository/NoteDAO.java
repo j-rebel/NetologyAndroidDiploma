@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface NoteDAO {
 
-        @Query("SELECT * FROM note")
+        @Query("SELECT * FROM note ORDER BY year DESC")
         List<Note> getAll();
 
         @Insert (onConflict = OnConflictStrategy.REPLACE)
