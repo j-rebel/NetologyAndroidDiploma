@@ -10,13 +10,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_tasks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:itemCount="5"
+        tools:listitem="@layout/note_card" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

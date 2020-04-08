@@ -12,4 +12,9 @@
     <string name="field_deadline">Click to modify</string>
     <string name="no_title_or_text">Title or text should be filled</string>
     <string name="new_note_added">New note added!</string>
+    <string name="note_updated">Note updated!</string>
+    <string name="note_deleted">Note deleted!</string>
+    <string name="b_save">Save</string>
+    <string name="b_delete">Delete</string>
+    <string name="b_update">Update</string>
 </resources>

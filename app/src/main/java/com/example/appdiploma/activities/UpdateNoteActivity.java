@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
     private EditText editTextTitle, editTextDesc;
     private TextView mDate;
-    private CheckBox checkBoxFinished;
+    private CheckBox mHasDeadline;
     int DIALOG_DATE = 1;
     int myYear = 2020;
     int myMonth = 3;
@@ -62,7 +63,18 @@ public class UpdateNoteActivity extends AppCompatActivity {
             }
         });
 
-        checkBoxFinished = findViewById(R.id.hasDeadline);
+        mHasDeadline = findViewById(R.id.hasDeadline);
+        mHasDeadline.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mDate.setVisibility(View.VISIBLE);
+                } else {
+                    mDate.setVisibility(View.GONE);
+                    mDate.setText("");
+                }
+            }
+        });
 
 
         final Note note = (Note) getIntent().getSerializableExtra("task");
@@ -72,7 +84,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
                 updateNote(note);
             }
         });
@@ -113,7 +125,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private void loadTask(Note note) {
         editTextTitle.setText(note.getTitle());
         editTextDesc.setText(note.getText());
-        mDate.setText(note.getYear() + "/" + (note.getMonth() + 1) + "/" + note.getDay());
+        String dateToDisplay = note.getYear() + "/" + (note.getMonth() + 1) + "/" + note.getDay();
+        mDate.setText(dateToDisplay);
         myYear = note.getYear();
         myMonth = note.getMonth();
         myDay = note.getDay();
