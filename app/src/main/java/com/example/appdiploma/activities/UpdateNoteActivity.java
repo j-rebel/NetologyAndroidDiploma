@@ -134,7 +134,13 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 (note.getMonth() + 1) +
                 getString(R.string.date_divider) +
                 note.getDay();
-        mDate.setText(dateToDisplay);
+        if(note.getYear() == 0 || dateToDisplay.isEmpty()) {
+            mHasDeadline.setChecked(false);
+            mDate.setText("");
+        } else {
+            mHasDeadline.setChecked(true);
+            mDate.setText(dateToDisplay);
+        }
         myYear = note.getYear();
         myMonth = note.getMonth();
         myDay = note.getDay();
@@ -146,7 +152,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
         final String text = mText.getText().toString().trim();
         final String finishBy = mDate.getText().toString().trim();
 
-        if (title.isEmpty() || text.isEmpty()) {
+        if (title.isEmpty() && text.isEmpty()) {
+            mTitle.setError(getString(R.string.no_title_or_text));
+            mText.setError(getString(R.string.no_title_or_text));
             return;
         }
 
