@@ -17,4 +17,9 @@
     <string name="b_save">Save</string>
     <string name="b_delete">Delete</string>
     <string name="b_update">Update</string>
+    <string name="dialog_sure">Are you sure, you want to delete this note?</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="extra_label">task</string>
+    <string name="date_divider">/</string>
 </resources>

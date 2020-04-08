@@ -36,7 +36,11 @@ public class AddNoteActivity extends AppCompatActivity {
             myYear = year;
             myMonth = monthOfYear;
             myDay = dayOfMonth;
-            String dateToDisplay = myYear + "/" + (myMonth + 1) + "/" + myDay;
+            String dateToDisplay = myYear +
+                    getString(R.string.date_divider) +
+                    (myMonth + 1) +
+                    getString(R.string.date_divider) +
+                    myDay;
             mDate.setText(dateToDisplay);
         }
     };
@@ -79,7 +83,11 @@ public class AddNoteActivity extends AppCompatActivity {
 
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_DATE) {
-            DatePickerDialog tpd = new DatePickerDialog(this, myCallBack, myYear, myMonth, myDay);
+            DatePickerDialog tpd = new DatePickerDialog(this,
+                    myCallBack,
+                    myYear,
+                    myMonth,
+                    myDay);
             return tpd;
         }
         return super.onCreateDialog(id);

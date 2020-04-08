@@ -41,7 +41,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
             myYear = year;
             myMonth = monthOfYear;
             myDay = dayOfMonth;
-            String dateToDisplay = myYear + "/" + (myMonth + 1) + "/" + myDay;
+            String dateToDisplay = myYear + getString(R.string.date_divider) + (myMonth + 1) + getString(R.string.date_divider) + myDay;
             mDate.setText(dateToDisplay);
         }
     };
@@ -77,7 +77,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         });
 
 
-        final Note note = (Note) getIntent().getSerializableExtra("task");
+        final Note note = (Note) getIntent().getSerializableExtra(getString(R.string.extra_label));
 
         loadTask(note);
 
@@ -94,14 +94,14 @@ public class UpdateNoteActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateNoteActivity.this);
-                builder.setTitle("Are you sure?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.dialog_sure));
+                builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteTask(note);
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -116,7 +116,11 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_DATE) {
-            DatePickerDialog tpd = new DatePickerDialog(this, myCallBack, myYear, myMonth, myDay);
+            DatePickerDialog tpd = new DatePickerDialog(this,
+                    myCallBack,
+                    myYear,
+                    myMonth,
+                    myDay);
             return tpd;
         }
         return super.onCreateDialog(id);
@@ -125,7 +129,11 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private void loadTask(Note note) {
         editTextTitle.setText(note.getTitle());
         editTextDesc.setText(note.getText());
-        String dateToDisplay = note.getYear() + "/" + (note.getMonth() + 1) + "/" + note.getDay();
+        String dateToDisplay = note.getYear() +
+                getString(R.string.date_divider) +
+                (note.getMonth() + 1) +
+                getString(R.string.date_divider) +
+                note.getDay();
         mDate.setText(dateToDisplay);
         myYear = note.getYear();
         myMonth = note.getMonth();
@@ -166,7 +174,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
                 finish();
                 startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
             }
@@ -191,7 +199,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
                 finish();
                 startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
             }

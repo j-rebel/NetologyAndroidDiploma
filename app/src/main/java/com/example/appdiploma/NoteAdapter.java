@@ -40,13 +40,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
         if (n.getText().isEmpty()) {
             holder.mText.setVisibility(View.GONE);
         }
-        if(n.getYear() == 0) {
+        if (n.getYear() == 0) {
             holder.mDate.setText("");
             holder.mDate.setVisibility(View.GONE);
             holder.mStatus.setText(mCtx.getString(R.string.status_no));
             holder.mStatus.setBackgroundColor(mCtx.getColor(R.color.colorGray));
         } else {
-            String dateToDisplay = n.getYear() + "/" + (n.getMonth() + 1) + "/" + n.getDay();
+            String dateToDisplay = n.getYear() +
+                    mCtx.getString(R.string.date_divider) +
+                    (n.getMonth() + 1) +
+                    mCtx.getString(R.string.date_divider) +
+                    n.getDay();
             holder.mDate.setText(dateToDisplay);
             switch (n.getState()) {
                 case 1:
@@ -91,7 +95,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
             Note note = noteList.get(getAdapterPosition());
 
             Intent intent = new Intent(mCtx, UpdateNoteActivity.class);
-            intent.putExtra("task", note);
+            intent.putExtra(mCtx.getString(R.string.extra_label), note);
 
             mCtx.startActivity(intent);
         }
