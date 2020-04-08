@@ -32,34 +32,34 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
         Note n = noteList.get(position);
-        holder.textViewTitle.setText(n.getTitle());
+        holder.mTitle.setText(n.getTitle());
         if (n.getTitle().isEmpty()) {
-            holder.textViewTitle.setVisibility(View.GONE);
+            holder.mTitle.setVisibility(View.GONE);
         }
-        holder.textViewDesc.setText(n.getText());
+        holder.mText.setText(n.getText());
         if (n.getText().isEmpty()) {
-            holder.textViewDesc.setVisibility(View.GONE);
+            holder.mText.setVisibility(View.GONE);
         }
         if(n.getYear() == 0) {
-            holder.textViewFinishBy.setText("");
-            holder.textViewFinishBy.setVisibility(View.GONE);
-            holder.textViewStatus.setText(mCtx.getString(R.string.status_no));
-            holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorGray));
+            holder.mDate.setText("");
+            holder.mDate.setVisibility(View.GONE);
+            holder.mStatus.setText(mCtx.getString(R.string.status_no));
+            holder.mStatus.setBackgroundColor(mCtx.getColor(R.color.colorGray));
         } else {
             String dateToDisplay = n.getYear() + "/" + (n.getMonth() + 1) + "/" + n.getDay();
-            holder.textViewFinishBy.setText(dateToDisplay);
+            holder.mDate.setText(dateToDisplay);
             switch (n.getState()) {
                 case 1:
-                    holder.textViewStatus.setText(mCtx.getString(R.string.status_planned));
-                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorGreen));
+                    holder.mStatus.setText(mCtx.getString(R.string.status_planned));
+                    holder.mStatus.setBackgroundColor(mCtx.getColor(R.color.colorGreen));
                     break;
                 case 0:
-                    holder.textViewStatus.setText(mCtx.getString(R.string.status_today));
-                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorYellow));
+                    holder.mStatus.setText(mCtx.getString(R.string.status_today));
+                    holder.mStatus.setBackgroundColor(mCtx.getColor(R.color.colorYellow));
                     break;
                 case -1:
-                    holder.textViewStatus.setText(mCtx.getString(R.string.status_overdued));
-                    holder.textViewStatus.setBackgroundColor(mCtx.getColor(R.color.colorRed));
+                    holder.mStatus.setText(mCtx.getString(R.string.status_overdued));
+                    holder.mStatus.setBackgroundColor(mCtx.getColor(R.color.colorRed));
                     break;
             }
         }
@@ -72,15 +72,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
 
     class TasksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewStatus, textViewTitle, textViewDesc, textViewFinishBy;
+        TextView mStatus, mTitle, mText, mDate;
 
         public TasksViewHolder(View itemView) {
             super(itemView);
 
-            textViewStatus = itemView.findViewById(R.id.status);
-            textViewTitle = itemView.findViewById(R.id.title);
-            textViewDesc = itemView.findViewById(R.id.text);
-            textViewFinishBy = itemView.findViewById(R.id.date);
+            mStatus = itemView.findViewById(R.id.status);
+            mTitle = itemView.findViewById(R.id.title);
+            mText = itemView.findViewById(R.id.text);
+            mDate = itemView.findViewById(R.id.date);
 
 
             itemView.setOnClickListener(this);
