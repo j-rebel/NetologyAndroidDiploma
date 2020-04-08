@@ -26,7 +26,7 @@ import java.util.GregorianCalendar;
 public class UpdateNoteActivity extends AppCompatActivity {
 
 
-    private EditText editTextTitle, editTextDesc;
+    private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
     int DIALOG_DATE = 1;
@@ -53,8 +53,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_update);
 
 
-        editTextTitle = findViewById(R.id.title);
-        editTextDesc = findViewById(R.id.text);
+        mTitle = findViewById(R.id.title);
+        mText = findViewById(R.id.text);
         mDate = findViewById(R.id.date);
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +127,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
     }
 
     private void loadTask(Note note) {
-        editTextTitle.setText(note.getTitle());
-        editTextDesc.setText(note.getText());
+        mTitle.setText(note.getTitle());
+        mText.setText(note.getText());
         String dateToDisplay = note.getYear() +
                 getString(R.string.date_divider) +
                 (note.getMonth() + 1) +
@@ -142,8 +142,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
     }
 
     private void updateNote(final Note note) {
-        final String title = editTextTitle.getText().toString().trim();
-        final String text = editTextDesc.getText().toString().trim();
+        final String title = mTitle.getText().toString().trim();
+        final String text = mText.getText().toString().trim();
         final String finishBy = mDate.getText().toString().trim();
 
         if (title.isEmpty() || text.isEmpty()) {

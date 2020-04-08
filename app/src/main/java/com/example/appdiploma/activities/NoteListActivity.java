@@ -39,11 +39,8 @@ public class NoteListActivity extends AppCompatActivity {
             }
         });
 
-
         getNotes();
-
     }
-
 
     private void getNotes() {
         class GetNotes extends AsyncTask<Void, Void, List<Note>> {
