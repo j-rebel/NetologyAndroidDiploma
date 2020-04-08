@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appdiploma.Note;
@@ -24,7 +25,8 @@ import java.util.GregorianCalendar;
 public class UpdateNoteActivity extends AppCompatActivity {
 
 
-    private EditText editTextTitle, editTextDesc, editTextFinishBy;
+    private EditText editTextTitle, editTextDesc;
+    private TextView mDate;
     private CheckBox checkBoxFinished;
     int DIALOG_DATE = 1;
     int myYear = 2020;
@@ -39,7 +41,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
             myMonth = monthOfYear;
             myDay = dayOfMonth;
             String dateToDisplay = myYear + "/" + (myMonth + 1) + "/" + myDay;
-            editTextFinishBy.setText(dateToDisplay);
+            mDate.setText(dateToDisplay);
         }
     };
 
@@ -52,15 +54,15 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
         editTextTitle = findViewById(R.id.title);
         editTextDesc = findViewById(R.id.text);
-        editTextFinishBy = findViewById(R.id.date);
-        editTextFinishBy.setOnClickListener(new View.OnClickListener() {
+        mDate = findViewById(R.id.date);
+        mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog(DIALOG_DATE);
             }
         });
 
-        checkBoxFinished = findViewById(R.id.checkBoxFinished);
+        checkBoxFinished = findViewById(R.id.hasDeadline);
 
 
         final Note note = (Note) getIntent().getSerializableExtra("task");
@@ -111,7 +113,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private void loadTask(Note note) {
         editTextTitle.setText(note.getTitle());
         editTextDesc.setText(note.getText());
-        editTextFinishBy.setText(note.getYear() + "/" + (note.getMonth() + 1) + "/" + note.getDay());
+        mDate.setText(note.getYear() + "/" + (note.getMonth() + 1) + "/" + note.getDay());
         myYear = note.getYear();
         myMonth = note.getMonth();
         myDay = note.getDay();
@@ -121,7 +123,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private void updateNote(final Note note) {
         final String title = editTextTitle.getText().toString().trim();
         final String text = editTextDesc.getText().toString().trim();
-        final String finishBy = editTextFinishBy.getText().toString().trim();
+        final String finishBy = mDate.getText().toString().trim();
 
         if (title.isEmpty() || text.isEmpty()) {
             return;
