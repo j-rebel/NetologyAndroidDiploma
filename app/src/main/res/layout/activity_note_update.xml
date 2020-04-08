@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateTaskActivity">
+    tools:context=".activities.UpdateNoteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <EditText
-            android:id="@+id/editTextTask"
+            android:id="@+id/editTextTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="task?" />

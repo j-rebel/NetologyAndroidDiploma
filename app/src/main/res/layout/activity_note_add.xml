@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTaskActivity">
+    tools:context=".activities.AddNoteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,27 +17,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Add a Task"
+            android:text="Add note"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <EditText
-            android:id="@+id/editTextTask"
+            android:id="@+id/editTextTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="task?" />
+            android:hint="title" />
 
         <EditText
             android:id="@+id/editTextDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="description..." />
+            android:gravity="start"
+            android:hint="description"
+            android:lines="10" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CheckBox" />
 
         <EditText
             android:id="@+id/editTextFinishBy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="finish by?" />
+            android:hint="deadline" />
 
         <Button
             android:id="@+id/button_save"

@@ -5,12 +5,13 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 @Entity
-public class Note {
+public class Note implements Serializable {
 
     @PrimaryKey
     private long id;
@@ -29,7 +30,7 @@ public class Note {
     @ColumnInfo(name = "milis")
     private long milis;
 
-    public Note(long id, String title, String text, int year, int month, int day) {
+    public Note(String title, String text, int year, int month, int day) {
         this.id = new Date().getTime();
         this.title = title;
         this.text = text;
@@ -77,6 +78,7 @@ public class Note {
     }
 
     public void setYear(int year) {
+        this.year = year;
         this.date = new GregorianCalendar(year, this.month, this.day, 0, 0, 0);
     }
 
@@ -85,6 +87,7 @@ public class Note {
     }
 
     public void setMonth(int month) {
+        this.month = month;
         this.date = new GregorianCalendar(this.year, month, this.day, 0, 0, 0);
     }
 
@@ -93,6 +96,7 @@ public class Note {
     }
 
     public void setDay(int day) {
+        this.day = day;
         this.date = new GregorianCalendar(this.year, this.month, day, 0, 0, 0);
     }
 
