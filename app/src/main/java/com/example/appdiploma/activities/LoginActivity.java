@@ -88,18 +88,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        int vId = v.getId();
+        int resetId = b_reset.getId();
+
         Button input = (Button) v;
-        if(v.getId() != b_reset.getId()) {
-            if (hidden.getText().toString().length() < 4) {
+        if(vId != resetId) {
+            if (getInputLength() < 4) {
                 hidden.append(input.getText());
             }
-            if (hidden.getText().toString().length() == 4) {
+            if (getInputLength() == 4) {
                 checkInput();
             }
         } else {
-            String result = null;
-            if ((hidden.getText().toString() != null) && (hidden.getText().toString().length() > 0)) {
-                result = hidden.getText().toString().substring(0, hidden.getText().length() - 1);
+            String result;
+            if ((getHidden() != null) && (getInputLength() > 0)) {
+                result = getHidden().substring(0, getInputLength() - 1);
                 hidden.setText(result);
             }
         }
@@ -107,13 +110,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkInput() {
-        App.getInstance().setPinPref("1234");
-        if (App.getInstance().getKeystore().checkPin(hidden.getText().toString())) {
+        boolean pinIsOK = App.getInstance().getKeystore().checkPin(getHidden());
+        if (pinIsOK) {
             Intent intent = new Intent(this, NoteListActivity.class);
             startActivity(intent);
         } else {
-            hidden.setText("");
-            paintCircles();
+            resetFields();
             Toast.makeText(this, getString(R.string.pin_error), Toast.LENGTH_LONG).show();
         }
     }
@@ -121,7 +123,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+        resetFields();
+    }
+
+    public void resetFields() {
         hidden.setText("");
         paintCircles();
+    }
+
+    public String getHidden() {
+        return hidden.getText().toString();
+    }
+
+    public int getInputLength() {
+        return hidden.getText().toString().length();
     }
 }
