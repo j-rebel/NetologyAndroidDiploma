@@ -1,19 +1,14 @@
 package com.example.appdiploma.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chaos.view.PinView;
 import com.example.appdiploma.App;
 import com.example.appdiploma.R;
 
@@ -88,8 +83,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 circles.get(i).setBackground(App.getInstance().getEmpty());
             }
         }
-
-
     }
 
     @Override
@@ -98,7 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(v.getId() != b_reset.getId()) {
             if (hidden.getText().toString().length() < 4) {
                 hidden.append(input.getText());
-            } else {
+            }
+            if (hidden.getText().toString().length() == 4) {
                 checkInput();
             }
         } else {
@@ -112,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkInput() {
-
+        Intent intent = new Intent(this, NoteListActivity.class);
+        startActivity(intent);
     }
 }
