@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appdiploma.App;
 import com.example.appdiploma.R;
@@ -106,7 +107,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkInput() {
-        Intent intent = new Intent(this, NoteListActivity.class);
-        startActivity(intent);
+        App.getInstance().setPinPref("1234");
+        if (App.getInstance().getKeystore().checkPin(hidden.getText().toString())) {
+            Intent intent = new Intent(this, NoteListActivity.class);
+            startActivity(intent);
+        } else {
+            hidden.setText("");
+            paintCircles();
+            Toast.makeText(this, getString(R.string.pin_error), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hidden.setText("");
+        paintCircles();
     }
 }

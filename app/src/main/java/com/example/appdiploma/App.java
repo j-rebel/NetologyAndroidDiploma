@@ -1,7 +1,12 @@
 package com.example.appdiploma;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+
+import com.example.appdiploma.keystore.Keystore;
+import com.example.appdiploma.keystore.SimpleKeystore;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +17,9 @@ public class App extends Application {
     private LocalDateTime now = LocalDateTime.now();
     private Drawable imgEmpty;
     private Drawable imgFilled;
+    private Context context;
+    private SharedPreferences pinPref;
+    private Keystore keystore;
 
     @Override
     public void onCreate() {
@@ -21,6 +29,11 @@ public class App extends Application {
         instance.now = LocalDateTime.now();
         imgEmpty = getDrawable(R.drawable.empty);
         imgFilled = getDrawable(R.drawable.filled);
+        context = this;
+        pinPref = context.getSharedPreferences(
+                getString(R.string.pin_pref), Context.MODE_PRIVATE);
+        keystore = new SimpleKeystore();
+
     }
 
     public static App getInstance() {
@@ -49,5 +62,23 @@ public class App extends Application {
 
     public Drawable getFilled() {
         return imgFilled;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public String getPinPref() {
+        return pinPref.getString(getString(R.string.pin_pref), "");
+    }
+
+    public void setPinPref(String newPin) {
+        SharedPreferences.Editor editor = pinPref.edit();
+        editor.putString(getString(R.string.pin_pref), newPin);
+        editor.commit();
+    }
+
+    public Keystore getKeystore() {
+        return keystore;
     }
 }

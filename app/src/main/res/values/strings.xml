@@ -35,4 +35,6 @@
     <string name="btn_0">0</string>
     <string name="btn_reset">С</string>
     <string name="circle_desc">pin circle</string>
+    <string name="pin_pref">pin</string>
+    <string name="pin_error">PIN doesn\'t match!</string>
 </resources>
