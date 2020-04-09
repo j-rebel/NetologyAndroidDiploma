@@ -70,9 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         circles.add(circle3);
         circles.add(circle4);
 
-        for (ImageView circle : circles) {
-            circle.setBackground(App.getInstance().getEmpty());
-        }
+        paintCircles();
     }
 
     public void paintCircles() {

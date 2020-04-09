@@ -27,8 +27,8 @@ public class App extends Application {
         instance = this;
         instance.DIALOG_DATE = 1;
         instance.now = LocalDateTime.now();
-        imgEmpty = getDrawable(R.drawable.empty);
-        imgFilled = getDrawable(R.drawable.filled);
+        imgEmpty = getDrawable(R.drawable.empty_48);
+        imgFilled = getDrawable(R.drawable.filled_48);
         context = this;
         pinPref = context.getSharedPreferences(
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
