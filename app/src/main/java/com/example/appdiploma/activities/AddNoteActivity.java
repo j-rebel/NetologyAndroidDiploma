@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.roomedRepository.DatabaseClient;
@@ -24,10 +25,10 @@ public class AddNoteActivity extends AppCompatActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = 1;
-    int myYear = 2020;
-    int myMonth = 3;
-    int myDay = 8;
+    int DIALOG_DATE = App.getDIALOG_DATE();
+    int myYear = App.getYear();
+    int myMonth = App.getMonth();
+    int myDay = App.getDay();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 

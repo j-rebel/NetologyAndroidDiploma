@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.roomedRepository.DatabaseClient;
@@ -29,10 +30,10 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = 1;
-    int myYear = 2020;
-    int myMonth = 3;
-    int myDay = 8;
+    int DIALOG_DATE = App.getDIALOG_DATE();
+    int myYear = App.getYear();
+    int myMonth = App.getMonth();
+    int myDay = App.getDay();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -134,16 +135,20 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 (note.getMonth() + 1) +
                 getString(R.string.date_divider) +
                 note.getDay();
+        myYear = note.getYear();
+        myMonth = note.getMonth();
+        myDay = note.getDay();
         if(note.getYear() == 0 || dateToDisplay.isEmpty()) {
             mHasDeadline.setChecked(false);
             mDate.setText("");
+            myYear = App.getYear();
+            myMonth = App.getMonth();
+            myDay = App.getDay();
         } else {
             mHasDeadline.setChecked(true);
             mDate.setText(dateToDisplay);
         }
-        myYear = note.getYear();
-        myMonth = note.getMonth();
-        myDay = note.getDay();
+
 
     }
 
