@@ -32,8 +32,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    //add these libraries
-    //support design
     implementation "com.android.support:design:$support_version"
 
     //card view
@@ -46,4 +44,6 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     testImplementation "android.arch.persistence.room:testing:$room_version"
+    implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }
