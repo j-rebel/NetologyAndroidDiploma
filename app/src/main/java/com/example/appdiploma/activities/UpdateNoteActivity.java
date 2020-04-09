@@ -30,10 +30,10 @@ public class UpdateNoteActivity extends AppCompatActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = App.getDIALOG_DATE();
-    int myYear = App.getYear();
-    int myMonth = App.getMonth();
-    int myDay = App.getDay();
+    int DIALOG_DATE = App.getInstance().getDIALOG_DATE();
+    int myYear = App.getInstance().getYear();
+    int myMonth = App.getInstance().getMonth();
+    int myDay = App.getInstance().getDay();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -141,9 +141,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
         if(note.getYear() == 0 || dateToDisplay.isEmpty()) {
             mHasDeadline.setChecked(false);
             mDate.setText("");
-            myYear = App.getYear();
-            myMonth = App.getMonth();
-            myDay = App.getDay();
+            myYear = App.getInstance().getYear();
+            myMonth = App.getInstance().getMonth();
+            myDay = App.getInstance().getDay();
         } else {
             mHasDeadline.setChecked(true);
             mDate.setText(dateToDisplay);

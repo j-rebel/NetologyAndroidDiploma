@@ -25,10 +25,10 @@ public class AddNoteActivity extends AppCompatActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = App.getDIALOG_DATE();
-    int myYear = App.getYear();
-    int myMonth = App.getMonth();
-    int myDay = App.getDay();
+    int DIALOG_DATE = App.getInstance().getDIALOG_DATE();
+    int myYear = App.getInstance().getYear();
+    int myMonth = App.getInstance().getMonth();
+    int myDay = App.getInstance().getDay();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
