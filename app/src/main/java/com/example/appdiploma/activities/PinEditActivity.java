@@ -31,7 +31,6 @@ public class PinEditActivity extends ToolbarActivity {
     }
 
     public void initView() {
-        saveButton = findViewById(R.id.button_save);
         pinInput = findViewById(R.id.pinInput);
     }
 

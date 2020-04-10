@@ -4,8 +4,8 @@
     <string name="status_overdued">Overdued</string>
     <string name="status_today">Today</string>
     <string name="status_no">No deadline</string>
-    <string name="note_add_title">Add new note:</string>
-    <string name="note_update_title">Update or delete note:</string>
+    <string name="note_add_title">New note</string>
+    <string name="note_update_title">Update/delete note</string>
     <string name="hint_title">Enter note title</string>
     <string name="hint_text">Enter note text</string>
     <string name="checkbox_deadline">Has deadline</string>

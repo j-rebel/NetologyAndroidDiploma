@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -79,14 +80,6 @@ public class AddNoteActivity extends ToolbarActivity {
                 }
             }
         });
-
-
-        findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveTask();
-            }
-        });
     }
 
     public void initToolbar() {
@@ -100,6 +93,12 @@ public class AddNoteActivity extends ToolbarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        saveTask();
         return true;
     }
 
