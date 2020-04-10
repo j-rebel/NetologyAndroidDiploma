@@ -30,16 +30,6 @@
             android:padding="16dp"
             tools:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/activityTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="@string/pin_edit_title"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                android:visibility="gone" />
-
             <EditText
                 android:id="@+id/pinInput"
                 android:layout_width="match_parent"
@@ -53,23 +43,6 @@
                 android:textSize="36sp"
                 tools:ignore="Autofill"
                 tools:text="1234" />
-
-            <Button
-                android:id="@+id/button_save"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="@color/colorGreen"
-                android:drawableStart="@drawable/ic_save_black"
-                android:drawableTint="@android:color/background_light"
-                android:padding="10dp"
-                android:text="@string/b_save"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
 
         </LinearLayout>
 
