@@ -86,9 +86,9 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_1"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -96,9 +96,9 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_2"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -106,9 +106,9 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_3"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -116,9 +116,9 @@
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_4"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -126,9 +126,9 @@
             android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_5"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -136,9 +136,9 @@
             android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_6"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -146,9 +146,9 @@
             android:id="@+id/button7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_7"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -156,9 +156,9 @@
             android:id="@+id/button8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_8"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -166,9 +166,9 @@
             android:id="@+id/button9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_9"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -176,9 +176,9 @@
             android:id="@+id/button0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/btn_0"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_columnSpan="2"
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorRed"
             android:text="@string/btn_reset"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold" />
 
