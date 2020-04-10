@@ -29,6 +29,8 @@ public class Note implements Serializable {
     private int day;
     @ColumnInfo(name = "milis")
     private long milis;
+    @ColumnInfo(name = "state")
+    private int state;
 
     public Note(String title, String text, int year, int month, int day) {
         this.id = new Date().getTime();
@@ -39,6 +41,7 @@ public class Note implements Serializable {
         this.day = day;
         this.date = new GregorianCalendar(year, month, day, 0, 0, 0);
         this.milis = this.date.getTimeInMillis();
+        this.state = compareToToday(this.date);
     }
 
     public long getId() {
@@ -101,7 +104,7 @@ public class Note implements Serializable {
     }
 
     public long getMilis() {
-        return milis;
+        return this.milis;
     }
 
     public void setMilis(long milis) {
@@ -109,12 +112,20 @@ public class Note implements Serializable {
     }
 
     public int getState() {
+        return this.state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int compareToToday(GregorianCalendar date) {
         GregorianCalendar today = new GregorianCalendar();
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
 
-        return this.getDate().compareTo(today);
+       return date.compareTo(today);
     }
 }

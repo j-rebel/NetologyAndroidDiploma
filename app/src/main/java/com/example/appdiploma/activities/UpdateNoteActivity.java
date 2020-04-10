@@ -177,6 +177,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 note.setYear(myYear);
                 note.setMonth(myMonth);
                 note.setDay(myDay);
+                note.setState(note.compareToToday(note.getDate()));
                 App.getInstance().getNoteList().update(note);
                 return null;
             }
