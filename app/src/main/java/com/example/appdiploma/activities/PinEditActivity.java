@@ -50,19 +50,26 @@ public class PinEditActivity extends ToolbarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String newPin = pinInput.getText().toString();
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                String newPin = pinInput.getText().toString();
 
-        if (newPin.length() == 4) {
-            App.getInstance().getKeystore().saveNew(newPin);
-            App.getInstance().setNotFirstTime();
-            Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(PinEditActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            pinInput.setText("");
-            Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();
+                if (newPin.length() == 4) {
+                    App.getInstance().getKeystore().saveNew(newPin);
+                    App.getInstance().setNotFirstTime();
+                    Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(PinEditActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    pinInput.setText("");
+                    Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case android.R.id.home:
+                startActivity(new Intent(PinEditActivity.this, NoteListActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 }

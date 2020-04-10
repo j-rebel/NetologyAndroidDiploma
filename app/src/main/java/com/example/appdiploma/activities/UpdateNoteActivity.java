@@ -129,6 +129,9 @@ public class UpdateNoteActivity extends ToolbarActivity {
                 AlertDialog ad = builder.create();
                 ad.show();
                 return true;
+            case android.R.id.home:
+                startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -207,7 +210,6 @@ public class UpdateNoteActivity extends ToolbarActivity {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
                 startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
-                finish();
             }
         }
 
@@ -229,7 +231,6 @@ public class UpdateNoteActivity extends ToolbarActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
-                finish();
                 startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
             }
         }

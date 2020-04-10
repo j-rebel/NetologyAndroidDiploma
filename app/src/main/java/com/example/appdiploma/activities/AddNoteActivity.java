@@ -98,8 +98,16 @@ public class AddNoteActivity extends ToolbarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        saveTask();
-        return true;
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                saveTask();
+                return true;
+            case android.R.id.home:
+                startActivity(new Intent(AddNoteActivity.this, NoteListActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     protected Dialog onCreateDialog(int id) {
@@ -146,7 +154,6 @@ public class AddNoteActivity extends ToolbarActivity {
                 super.onPostExecute(aVoid);
                 startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
                 Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
-                finish();
             }
         }
 

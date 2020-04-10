@@ -44,7 +44,6 @@ public class NoteListActivity extends ToolbarActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NoteListActivity.this, AddNoteActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -65,7 +64,6 @@ public class NoteListActivity extends ToolbarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, PinEditActivity.class);
         startActivity(intent);
-        finish();
         return true;
     }
 
