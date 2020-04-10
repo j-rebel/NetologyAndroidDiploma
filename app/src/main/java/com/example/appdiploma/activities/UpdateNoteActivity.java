@@ -1,7 +1,9 @@
 package com.example.appdiploma.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -9,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,10 +23,11 @@ import android.widget.Toast;
 import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
+import com.example.appdiploma.ToolbarActivity;
 
 import java.util.GregorianCalendar;
 
-public class UpdateNoteActivity extends AppCompatActivity {
+public class UpdateNoteActivity extends ToolbarActivity {
 
 
     private EditText mTitle, mText;
@@ -51,8 +55,11 @@ public class UpdateNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_update);
+        initToolbar();
+        initViews();
+    }
 
-
+    public void initViews() {
         mTitle = findViewById(R.id.title);
         mText = findViewById(R.id.text);
         mDate = findViewById(R.id.date);
@@ -112,6 +119,20 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 ad.show();
             }
         });
+    }
+
+    public void initToolbar() {
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        myToolbar.setTitle(R.string.note_update_title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_updade_delete, menu);
+        return true;
     }
 
     protected Dialog onCreateDialog(int id) {

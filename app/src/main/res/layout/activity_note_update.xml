@@ -1,105 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.UpdateNoteActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <include
+        android:id="@+id/included_bar"
+        layout="@layout/activity_toolbar" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="false"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".activities.NoteListActivity">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/note_update_title"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+            android:layout_centerVertical="false"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="UselessParent">
 
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_edit"
-            android:gravity="top"
-            android:hint="@string/hint_title"
-            android:inputType="text"
-            tools:ignore="Autofill" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/note_update_title"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
-        <EditText
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_edit"
-            android:gravity="top"
-            android:hint="@string/hint_text"
-            android:inputType="text"
-            android:lines="7"
-            tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_edit"
+                android:gravity="top"
+                android:hint="@string/hint_title"
+                android:inputType="text"
+                tools:ignore="Autofill" />
 
-        <CheckBox
-            android:id="@+id/hasDeadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/checkbox_deadline" />
+            <EditText
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_edit"
+                android:gravity="top"
+                android:hint="@string/hint_text"
+                android:inputType="text"
+                android:lines="7"
+                tools:ignore="Autofill" />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:drawableStart="@drawable/ic_date_white"
-            android:drawableTint="#FFFFFF"
-            android:gravity="center_horizontal|center_vertical"
-            android:hint="@string/field_deadline"
-            android:padding="10dp"
-            android:textColor="@color/cardview_light_background"
-            android:textColorHint="@color/cardview_light_background"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <CheckBox
+                android:id="@+id/hasDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/checkbox_deadline" />
 
-        <Button
-            android:id="@+id/button_update"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorYellow"
-            android:drawableStart="@drawable/ic_update_black"
-            android:drawableTint="#FFFFFF"
-            android:padding="10dp"
-            android:text="@string/b_update"
-            android:textAllCaps="false"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:drawableStart="@drawable/ic_date_white"
+                android:drawableTint="#FFFFFF"
+                android:gravity="center_horizontal|center_vertical"
+                android:hint="@string/field_deadline"
+                android:padding="10dp"
+                android:textColor="@color/cardview_light_background"
+                android:textColorHint="@color/cardview_light_background"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorRed"
-            android:drawableStart="@drawable/ic_delete_white"
-            android:drawableTint="#FFFFFF"
-            android:padding="10dp"
-            android:text="@string/b_delete"
-            android:textAllCaps="false"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/button_update"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorYellow"
+                android:drawableStart="@drawable/ic_update_black"
+                android:drawableTint="#FFFFFF"
+                android:padding="10dp"
+                android:text="@string/b_update"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorRed"
+                android:drawableStart="@drawable/ic_delete_white"
+                android:drawableTint="#FFFFFF"
+                android:padding="10dp"
+                android:text="@string/b_delete"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
 
-</RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

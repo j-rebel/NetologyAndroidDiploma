@@ -1,12 +1,15 @@
 package com.example.appdiploma.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,8 +21,9 @@ import android.widget.Toast;
 import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
+import com.example.appdiploma.ToolbarActivity;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class AddNoteActivity extends ToolbarActivity {
 
     private EditText mTitle, mText;
     private TextView mDate;
@@ -49,7 +53,11 @@ public class AddNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_add);
+        initToolbar();
+        initViews();
+    }
 
+    public void initViews() {
         mTitle = findViewById(R.id.title);
         mText = findViewById(R.id.text);
         mDate = findViewById(R.id.date);
@@ -79,6 +87,20 @@ public class AddNoteActivity extends AppCompatActivity {
                 saveTask();
             }
         });
+    }
+
+    public void initToolbar() {
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        myToolbar.setTitle(R.string.note_add_title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_save, menu);
+        return true;
     }
 
     protected Dialog onCreateDialog(int id) {

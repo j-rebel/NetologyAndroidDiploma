@@ -19,8 +19,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.UpdateNoteActivity" />
-        <activity android:name=".activities.AddNoteActivity" />
+        <activity android:name=".activities.UpdateNoteActivity"
+            android:parentActivityName=".activities.NoteListActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.NoteListActivity" />
+        </activity>
+        <activity android:name=".activities.AddNoteActivity"
+            android:parentActivityName=".activities.NoteListActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.NoteListActivity" />
+        </activity>
         <activity android:name=".activities.NoteListActivity" />
     </application>
 
