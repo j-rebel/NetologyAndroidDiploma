@@ -7,8 +7,11 @@ import android.graphics.drawable.Drawable;
 
 import com.example.appdiploma.keystore.Keystore;
 import com.example.appdiploma.keystore.SimpleKeystore;
+import com.example.appdiploma.roomedRepository.DatabaseClient;
+import com.example.appdiploma.roomedRepository.NoteDAO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class App extends Application {
 
@@ -33,7 +36,6 @@ public class App extends Application {
         pinPref = context.getSharedPreferences(
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
         keystore = new SimpleKeystore();
-
     }
 
     public static App getInstance() {
@@ -80,5 +82,12 @@ public class App extends Application {
 
     public Keystore getKeystore() {
         return keystore;
+    }
+
+    public NoteDAO getNoteList() {
+        return DatabaseClient
+                .getInstance(getApplicationContext())
+                .getAppDatabase()
+                .noteDAO();
     }
 }

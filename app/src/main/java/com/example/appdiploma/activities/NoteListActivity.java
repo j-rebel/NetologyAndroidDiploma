@@ -9,10 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.NoteAdapter;
 import com.example.appdiploma.R;
-import com.example.appdiploma.roomedRepository.DatabaseClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -47,11 +47,7 @@ public class NoteListActivity extends AppCompatActivity {
 
             @Override
             protected List<Note> doInBackground(Void... voids) {
-                List<Note> noteList = DatabaseClient
-                        .getInstance(getApplicationContext())
-                        .getAppDatabase()
-                        .noteDAO()
-                        .getAll();
+                List<Note> noteList = App.getInstance().getNoteList().getAll();
                 return noteList;
             }
 

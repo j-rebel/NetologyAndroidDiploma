@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
-import com.example.appdiploma.roomedRepository.DatabaseClient;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -117,9 +116,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 }
                 Note note = new Note(title, text, myYear, myMonth, myDay);
 
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .noteDAO()
-                        .insert(note);
+                App.getInstance().getNoteList().insert(note);
                 return null;
             }
 

@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
-import com.example.appdiploma.roomedRepository.DatabaseClient;
 
 import java.util.GregorianCalendar;
 
@@ -178,9 +177,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 note.setYear(myYear);
                 note.setMonth(myMonth);
                 note.setDay(myDay);
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .noteDAO()
-                        .update(note);
+                App.getInstance().getNoteList().update(note);
                 return null;
             }
 
@@ -203,9 +200,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .noteDAO()
-                        .delete(note);
+                App.getInstance().getNoteList().delete(note);
                 return null;
             }
 
