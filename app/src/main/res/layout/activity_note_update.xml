@@ -26,6 +26,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/text_48"
+            android:gravity="top"
             android:hint="@string/hint_title"
             android:inputType="text"
             tools:ignore="Autofill" />
@@ -34,6 +36,8 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/text_48"
+            android:gravity="top"
             android:hint="@string/hint_text"
             android:inputType="text"
             android:lines="7"
@@ -49,10 +53,14 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorYellow"
+            android:background="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawableTint="#FFFFFF"
             android:gravity="center_horizontal|center_vertical"
             android:hint="@string/field_deadline"
             android:padding="10dp"
+            android:textColor="@color/cardview_light_background"
+            android:textColorHint="@color/cardview_light_background"
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -64,10 +72,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorYellow"
+            android:drawableStart="@drawable/ic_update_black_24dp"
+            android:drawableTint="#FFFFFF"
+            android:padding="10dp"
             android:text="@string/b_update"
             android:textAllCaps="false"
-            android:textColor="@color/colorLight" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
         <Button
@@ -77,9 +90,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="@color/colorRed"
+            android:drawableStart="@drawable/ic_delete_forever_black_24dp"
+            android:drawableTint="#FFFFFF"
+            android:padding="10dp"
             android:text="@string/b_delete"
             android:textAllCaps="false"
-            android:textColor="@color/colorLight" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
