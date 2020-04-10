@@ -36,7 +36,9 @@
     <string name="btn_reset">С</string>
     <string name="circle_desc">pin circle</string>
     <string name="pin_pref">pin</string>
+    <string name="first_run_pref">firstRun</string>
     <string name="pin_error">PIN doesn\'t match!</string>
     <string name="pin_edit_title">Enter new PIN</string>
     <string name="pin_edit_error">Incorrect PIN</string>
+    <string name="pin_edit_ok">PIN changed</string>
 </resources>

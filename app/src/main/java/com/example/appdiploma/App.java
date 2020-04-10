@@ -11,7 +11,6 @@ import com.example.appdiploma.roomedRepository.DatabaseClient;
 import com.example.appdiploma.roomedRepository.NoteDAO;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class App extends Application {
 
@@ -22,6 +21,7 @@ public class App extends Application {
     private Drawable imgFilled;
     private Context context;
     private SharedPreferences pinPref;
+    private SharedPreferences launch;
     private Keystore keystore;
 
     @Override
@@ -35,6 +35,8 @@ public class App extends Application {
         context = this;
         pinPref = context.getSharedPreferences(
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
+        launch = context.getSharedPreferences(
+                getString(R.string.first_run_pref), Context.MODE_PRIVATE);
         keystore = new SimpleKeystore();
     }
 
@@ -78,6 +80,18 @@ public class App extends Application {
         SharedPreferences.Editor editor = pinPref.edit();
         editor.putString(getString(R.string.pin_pref), newPin);
         editor.commit();
+    }
+
+    public boolean isFirstTime() {
+        return launch.getBoolean(getString(R.string.first_run_pref), true);
+    }
+
+    public void setNotFirstTime() {
+        if (!getPinPref().equals("")) {
+            SharedPreferences.Editor editor = launch.edit();
+            editor.putBoolean(getString(R.string.first_run_pref), false);
+            editor.commit();
+        }
     }
 
     public Keystore getKeystore() {

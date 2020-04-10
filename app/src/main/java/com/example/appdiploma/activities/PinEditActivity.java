@@ -2,6 +2,7 @@ package com.example.appdiploma.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,11 @@ public class PinEditActivity extends AppCompatActivity {
 
                 if (newPin.length() == 4) {
                     App.getInstance().getKeystore().saveNew(newPin);
+                    App.getInstance().setNotFirstTime();
+                    Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(PinEditActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     pinInput.setText("");
                     Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();

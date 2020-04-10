@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkFirstRun();
         setContentView(R.layout.activity_login);
         initViews();
         initCircles();
@@ -112,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (pinIsOK) {
             Intent intent = new Intent(this, NoteListActivity.class);
             startActivity(intent);
+            finish();
         } else {
             resetFields();
             Toast.makeText(this, getString(R.string.pin_error), Toast.LENGTH_LONG).show();
@@ -135,5 +137,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public int getInputLength() {
         return hidden.getText().toString().length();
+    }
+
+    public void checkFirstRun() {
+        if (App.getInstance().isFirstTime()) {
+            Intent intent = new Intent(this, PinEditActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

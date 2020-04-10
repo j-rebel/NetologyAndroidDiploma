@@ -42,6 +42,25 @@ public class NoteListActivity extends AppCompatActivity {
         getNotes();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getNotes();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getNotes();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getNotes();
+
+    }
+
     private void getNotes() {
         class GetNotes extends AsyncTask<Void, Void, List<Note>> {
 
