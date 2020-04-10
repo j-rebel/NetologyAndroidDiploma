@@ -4,10 +4,10 @@ import com.example.appdiploma.App;
 
 public class SimpleKeystore implements Keystore {
 
-    @Override
+    /*@Override
     public boolean hasPin() {
         return !App.getInstance().getPinPref().isEmpty();
-    }
+    }*/
 
     @Override
     public boolean checkPin(String pin) {

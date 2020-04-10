@@ -27,24 +27,4 @@ public class ToolbarActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main,menu);
         return true;
     }
-
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_go_to_settings:
-                // User chose the "Settings" item, show the app settings UI...
-                return true;
-
-            case R.id.act:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }*/
 }
