@@ -185,8 +185,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
-                finish();
                 startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
+                finish();
             }
         }
 

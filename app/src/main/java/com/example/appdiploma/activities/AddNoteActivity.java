@@ -123,9 +123,9 @@ public class AddNoteActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                finish();
                 startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
                 Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
+                finish();
             }
         }
 

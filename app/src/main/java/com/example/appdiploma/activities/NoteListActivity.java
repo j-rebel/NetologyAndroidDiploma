@@ -36,6 +36,7 @@ public class NoteListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NoteListActivity.this, AddNoteActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -45,6 +46,12 @@ public class NoteListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        getNotes();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
         getNotes();
     }
 
@@ -71,9 +78,9 @@ public class NoteListActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(List<Note> tasks) {
-                super.onPostExecute(tasks);
-                NoteAdapter adapter = new NoteAdapter(NoteListActivity.this, tasks);
+            protected void onPostExecute(List<Note> notes) {
+                super.onPostExecute(notes);
+                NoteAdapter adapter = new NoteAdapter(NoteListActivity.this, notes);
                 recyclerView.setAdapter(adapter);
             }
         }
