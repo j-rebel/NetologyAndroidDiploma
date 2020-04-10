@@ -159,7 +159,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
         myYear = note.getYear();
         myMonth = note.getMonth();
         myDay = note.getDay();
-        if(note.getYear() == 0 || dateToDisplay.isEmpty()) {
+        if (note.getYear() == 0 || dateToDisplay.isEmpty()) {
             mHasDeadline.setChecked(false);
             mDate.setText("");
             myYear = App.getInstance().getYear();

@@ -14,16 +14,16 @@ import java.util.List;
 @Dao
 public interface NoteDAO {
 
-        @Query("SELECT * FROM note ORDER BY year DESC")
-        List<Note> getAll();
+    @Query("SELECT * FROM note ORDER BY year DESC")
+    List<Note> getAll();
 
-        @Insert (onConflict = OnConflictStrategy.REPLACE)
-        void insert(Note note);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Note note);
 
-        @Delete
-        void delete(Note note);
+    @Delete
+    void delete(Note note);
 
-        @Update
-        void update(Note note);
+    @Update
+    void update(Note note);
 
 }

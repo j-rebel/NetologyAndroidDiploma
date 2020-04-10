@@ -30,7 +30,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
     }
 
 
-
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
         Note n = noteList.get(position);

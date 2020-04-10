@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int resetId = b_reset.getId();
 
         Button input = (Button) v;
-        if(vId != resetId) {
+        if (vId != resetId) {
             if (getInputLength() < 4) {
                 hidden.append(input.getText());
             }
