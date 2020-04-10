@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +65,24 @@ public class PinEditActivity extends ToolbarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String newPin = pinInput.getText().toString();
+
+        if (newPin.length() == 4) {
+            App.getInstance().getKeystore().saveNew(newPin);
+            App.getInstance().setNotFirstTime();
+            Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(PinEditActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            pinInput.setText("");
+            Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();
+        }
         return true;
     }
 }

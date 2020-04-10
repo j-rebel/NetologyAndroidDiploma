@@ -37,18 +37,22 @@
                 android:layout_margin="15dp"
                 android:text="@string/pin_edit_title"
                 android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/pinInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_edit"
+                android:drawablePadding="25dp"
                 android:gravity="top"
                 android:hint="@string/pin_edit_title"
                 android:inputType="numberPassword"
                 android:maxLength="4"
-                tools:ignore="Autofill" />
+                android:textSize="36sp"
+                tools:ignore="Autofill"
+                tools:text="1234" />
 
             <Button
                 android:id="@+id/button_save"
@@ -64,7 +68,8 @@
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
 
