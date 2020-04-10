@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -83,42 +84,8 @@ public class UpdateNoteActivity extends ToolbarActivity {
             }
         });
 
-
         final Note note = (Note) getIntent().getSerializableExtra(getString(R.string.extra_label));
-
         loadTask(note);
-
-        findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
-                updateNote(note);
-            }
-        });
-
-        findViewById(R.id.button_delete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateNoteActivity.this);
-                builder.setTitle(getString(R.string.dialog_sure));
-                builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteTask(note);
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-
-                AlertDialog ad = builder.create();
-                ad.show();
-            }
-        });
     }
 
     public void initToolbar() {
@@ -133,6 +100,38 @@ public class UpdateNoteActivity extends ToolbarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_updade_delete, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_update:
+                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
+                updateNote((Note) getIntent().getSerializableExtra(getString(R.string.extra_label)));
+                return true;
+            case R.id.action_delete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateNoteActivity.this);
+                builder.setTitle(getString(R.string.dialog_sure));
+                builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteTask((Note) getIntent().getSerializableExtra(getString(R.string.extra_label)));
+                    }
+                });
+                builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                AlertDialog ad = builder.create();
+                ad.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     protected Dialog onCreateDialog(int id) {
