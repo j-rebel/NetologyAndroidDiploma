@@ -7,10 +7,15 @@
     android:padding="8dp"
     tools:context=".activities.NoteListActivity">
 
+    <include
+        android:id="@+id/included_bar"
+        layout="@layout/activity_toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_tasks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         tools:itemCount="5"
         tools:listitem="@layout/note_card" />
 

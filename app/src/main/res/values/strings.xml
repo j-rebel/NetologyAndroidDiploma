@@ -41,4 +41,5 @@
     <string name="pin_edit_title">Enter new PIN</string>
     <string name="pin_edit_error">Incorrect PIN</string>
     <string name="pin_edit_ok">PIN changed</string>
+    <string name="note_list_title">Notes</string>
 </resources>

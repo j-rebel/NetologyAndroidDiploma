@@ -1,23 +1,26 @@
 package com.example.appdiploma.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.NoteAdapter;
 import com.example.appdiploma.R;
+import com.example.appdiploma.ToolbarActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class NoteListActivity extends AppCompatActivity {
+public class NoteListActivity extends ToolbarActivity {
 
     private FloatingActionButton buttonAddTask;
     private RecyclerView recyclerView;
@@ -26,7 +29,12 @@ public class NoteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notelist);
+        initToolbar();
+        initViews();
+        getNotes();
+    }
 
+    public void initViews() {
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -39,8 +47,18 @@ public class NoteListActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-        getNotes();
+    public void initToolbar() {
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setTitle(R.string.note_list_title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_go_to_setting, menu);
+        return true;
     }
 
     @Override

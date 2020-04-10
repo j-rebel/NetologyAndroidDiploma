@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:drawableTop="@drawable/ic_lock_black_24dp"
+        android:drawableTop="@drawable/ic_lock_black"
         android:drawablePadding="30dp"
         android:gravity="center_horizontal"
         android:padding="10dp"
