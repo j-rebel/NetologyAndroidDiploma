@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +22,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
@@ -32,16 +32,13 @@ public class AddNoteActivity extends ToolbarActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = App.getInstance().getDIALOG_DATE();
-    int myYear = App.getInstance().getYear();
-    int myMonth = App.getInstance().getMonth();
-    int myDay = App.getInstance().getDay();
+    int DIALOG_DATE;
+    int myYear;
+    int myMonth;
+    int myDay;
     private CompositeDisposable disposable = new CompositeDisposable();
     private NoteDAO noteDAO;
-
-    public void setNoteDAO(NoteDAO noteDAO) {
-        this.noteDAO = noteDAO;
-    }
+    private Context context;
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -157,8 +154,8 @@ public class AddNoteActivity extends ToolbarActivity {
                 .subscribe(new Action() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
-                        Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(context, NoteListActivity.class));
+                        Toast.makeText(context, getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
                     }
                 })
         );
@@ -168,5 +165,29 @@ public class AddNoteActivity extends ToolbarActivity {
     protected void onDestroy() {
         super.onDestroy();
         disposable.dispose();
+    }
+
+    public void setDIALOG_DATE(int DIALOG_DATE) {
+        this.DIALOG_DATE = DIALOG_DATE;
+    }
+
+    public void setMyYear(int myYear) {
+        this.myYear = myYear;
+    }
+
+    public void setMyMonth(int myMonth) {
+        this.myMonth = myMonth;
+    }
+
+    public void setMyDay(int myDay) {
+        this.myDay = myDay;
+    }
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

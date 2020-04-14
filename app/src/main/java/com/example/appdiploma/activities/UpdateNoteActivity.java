@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
@@ -37,16 +37,13 @@ public class UpdateNoteActivity extends ToolbarActivity {
     private EditText mTitle, mText;
     private TextView mDate;
     private CheckBox mHasDeadline;
-    int DIALOG_DATE = App.getInstance().getDIALOG_DATE();
-    int myYear = App.getInstance().getYear();
-    int myMonth = App.getInstance().getMonth();
-    int myDay = App.getInstance().getDay();
+    int DIALOG_DATE;
+    int myYear;
+    int myMonth;
+    int myDay;
     private CompositeDisposable disposable = new CompositeDisposable();
     private NoteDAO noteDAO;
-
-    public void setNoteDAO(NoteDAO noteDAO) {
-        this.noteDAO = noteDAO;
-    }
+    private Context context;
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -116,7 +113,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
 
         switch (item.getItemId()) {
             case R.id.action_update:
-                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getString(R.string.note_updated), Toast.LENGTH_LONG).show();
                 updateNote((Note) getIntent().getSerializableExtra(getString(R.string.extra_label)));
                 return true;
             case R.id.action_delete:
@@ -166,16 +163,13 @@ public class UpdateNoteActivity extends ToolbarActivity {
                 (note.getMonth() + 1) +
                 getString(R.string.date_divider) +
                 note.getDay();
-        myYear = note.getYear();
-        myMonth = note.getMonth();
-        myDay = note.getDay();
         if (note.getYear() == 0 || dateToDisplay.isEmpty()) {
             mHasDeadline.setChecked(false);
             mDate.setText("");
-            myYear = App.getInstance().getYear();
-            myMonth = App.getInstance().getMonth();
-            myDay = App.getInstance().getDay();
         } else {
+            myYear = note.getYear();
+            myMonth = note.getMonth();
+            myDay = note.getDay();
             mHasDeadline.setChecked(true);
             mDate.setText(dateToDisplay);
         }
@@ -212,7 +206,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
                 .subscribe(new Action() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.note_updated), Toast.LENGTH_LONG).show();
                         startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
                     }
                 }));
@@ -226,7 +220,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
                 .subscribe(new Action() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
                         startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
                     }
                 }));
@@ -236,5 +230,29 @@ public class UpdateNoteActivity extends ToolbarActivity {
     protected void onDestroy() {
         super.onDestroy();
         disposable.dispose();
+    }
+
+    public void setDIALOG_DATE(int DIALOG_DATE) {
+        this.DIALOG_DATE = DIALOG_DATE;
+    }
+
+    public void setMyYear(int myYear) {
+        this.myYear = myYear;
+    }
+
+    public void setMyMonth(int myMonth) {
+        this.myMonth = myMonth;
+    }
+
+    public void setMyDay(int myDay) {
+        this.myDay = myDay;
+    }
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

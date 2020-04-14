@@ -29,6 +29,9 @@ public class App extends Application {
     private static App instance;
     private int DIALOG_DATE;
     private LocalDateTime now = LocalDateTime.now();
+    private int year;
+    private int month;
+    private int day;
     private Drawable imgEmpty;
     private Drawable imgFilled;
     private Context context;
@@ -41,11 +44,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        context = this;
         instance.DIALOG_DATE = 1;
         instance.now = LocalDateTime.now();
+        year = now.getYear();
+        month = now.getMonthValue() - 1;
+        day = now.getDayOfMonth();
         imgEmpty = getDrawable(R.drawable.empty_48);
         imgFilled = getDrawable(R.drawable.filled_48);
-        context = this;
         pinPref = context.getSharedPreferences(
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
         launch = context.getSharedPreferences(
@@ -73,12 +79,22 @@ public class App extends Application {
             @Override
             public void inject(AddNoteActivity component) {
                 component.setNoteDAO(noteDAO);
+                component.setDIALOG_DATE(DIALOG_DATE);
+                component.setMyYear(year);
+                component.setMyMonth(month);
+                component.setMyDay(day);
+                component.setContext(context);
             }
         });
         injectors.put(UpdateNoteActivity.class, new Injector<UpdateNoteActivity>() {
             @Override
             public void inject(UpdateNoteActivity component) {
                 component.setNoteDAO(noteDAO);
+                component.setDIALOG_DATE(DIALOG_DATE);
+                component.setMyYear(year);
+                component.setMyMonth(month);
+                component.setMyDay(day);
+                component.setContext(context);
             }
         });
 
@@ -127,22 +143,6 @@ public class App extends Application {
         return instance;
     }
 
-    public int getDIALOG_DATE() {
-        return DIALOG_DATE;
-    }
-
-    public int getYear() {
-        return now.getYear();
-    }
-
-    public int getMonth() {
-        return now.getMonthValue() - 1;
-    }
-
-    public int getDay() {
-        return now.getDayOfMonth();
-    }
-
     public Drawable getEmpty() {
         return imgEmpty;
     }
@@ -175,7 +175,4 @@ public class App extends Application {
         return keystore;
     }
 
-    public NoteDAO getNoteDAO() {
-        return noteDAO;
-    }
 }
