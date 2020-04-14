@@ -57,7 +57,6 @@ public class App extends Application {
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
         firstRun = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
-        //firstRun = launch.getBoolean(getString(R.string.first_run_pref), true);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
         noteDAO = DatabaseClient
                 .getInstance(getApplicationContext())
@@ -79,6 +78,7 @@ public class App extends Application {
             public void inject(PinEditActivity component) {
                 component.setKeystore(keystore);
                 component.setFirstRun(firstRun);
+                component.setContext(context);
             }
         });
         injectors.put(NoteListActivity.class, new Injector<NoteListActivity>() {
@@ -149,10 +149,6 @@ public class App extends Application {
                 // Do nothing
             }
         });
-    }
-
-    public Context getContext() {
-        return context;
     }
 
 }
