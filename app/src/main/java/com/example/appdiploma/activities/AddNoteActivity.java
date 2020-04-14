@@ -2,6 +2,10 @@ package com.example.appdiploma.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -32,6 +36,7 @@ public class AddNoteActivity extends ToolbarActivity {
     int myYear = App.getInstance().getYear();
     int myMonth = App.getInstance().getMonth();
     int myDay = App.getInstance().getDay();
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -132,33 +137,32 @@ public class AddNoteActivity extends ToolbarActivity {
             return;
         }
 
-        class SaveTask extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                if (finishBy.isEmpty()) {
-                    myYear = 0;
-                    myMonth = 0;
-                    myDay = 0;
-                }
-                Note note = new Note(title, text, myYear, myMonth, myDay);
-
-                App.getInstance().getNoteList().insert(note);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
-                Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
-            }
+        if (finishBy.isEmpty()) {
+            myYear = 0;
+            myMonth = 0;
+            myDay = 0;
         }
+        Note note = new Note(title, text, myYear, myMonth, myDay);
 
-        SaveTask st = new SaveTask();
-        st.execute();
+        disposable.add(
+                App.getInstance()
+                        .getNoteList()
+                        .insert(note)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
+                                Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
+                            }
+                        })
+        );
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
+    }
 }
