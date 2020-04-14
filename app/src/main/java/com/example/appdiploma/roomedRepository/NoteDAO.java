@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
 
 import com.example.appdiploma.Note;
 
@@ -15,15 +17,14 @@ import java.util.List;
 public interface NoteDAO {
 
     @Query("SELECT * FROM note ORDER BY year DESC")
-    List<Note> getAll();
+    Observable<List<Note>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Note note);
+    Completable insert(Note note);
 
     @Delete
-    void delete(Note note);
+    Completable delete(Note note);
 
     @Update
-    void update(Note note);
-
+    Completable update(Note note);
 }
