@@ -1,11 +1,6 @@
 package com.example.appdiploma.activities;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,10 +15,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class NoteListActivity extends ToolbarActivity {
 
     private FloatingActionButton buttonAddTask;
     private RecyclerView recyclerView;
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,49 +72,23 @@ public class NoteListActivity extends ToolbarActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        getNotes();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getNotes();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getNotes();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        getNotes();
-
+        disposable.dispose();
     }
 
     private void getNotes() {
-        class GetNotes extends AsyncTask<Void, Void, List<Note>> {
-
-            @Override
-            protected List<Note> doInBackground(Void... voids) {
-                List<Note> noteList = App.getInstance().getNoteList().getAll();
-                return noteList;
-            }
-
-            @Override
-            protected void onPostExecute(List<Note> notes) {
-                super.onPostExecute(notes);
-                NoteAdapter adapter = new NoteAdapter(NoteListActivity.this, notes);
-                recyclerView.setAdapter(adapter);
-            }
-        }
-
-        GetNotes gt = new GetNotes();
-        gt.execute();
+        disposable.add(App.getInstance().
+                getNoteList()
+                .getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Note>>() {
+                    @Override
+                    public void accept(List<Note> notes) {
+                        NoteAdapter adapter = new NoteAdapter(NoteListActivity.this, notes);
+                        recyclerView.setAdapter(adapter);
+                    }
+                }));
     }
-
 }
