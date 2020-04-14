@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.appdiploma.App;
 import com.example.appdiploma.R;
+import com.example.appdiploma.keystore.Keystore;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView hidden;
     private ArrayList<ImageView> circles = new ArrayList<>();
 
+    private Keystore keystore;
+
+    public void setKeystore(Keystore keystore) {
+        this.keystore = keystore;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkInput() {
-        boolean pinIsOK = App.getInstance().getKeystore().checkPin(getHidden());
+        boolean pinIsOK = keystore.checkPin(getHidden());
         if (pinIsOK) {
             Intent intent = new Intent(this, NoteListActivity.class);
             startActivity(intent);
