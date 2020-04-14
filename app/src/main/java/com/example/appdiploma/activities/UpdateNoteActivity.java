@@ -3,12 +3,15 @@ package com.example.appdiploma.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +40,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
     int myYear = App.getInstance().getYear();
     int myMonth = App.getInstance().getMonth();
     int myDay = App.getInstance().getDay();
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -184,59 +188,47 @@ public class UpdateNoteActivity extends ToolbarActivity {
             return;
         }
 
-        class UpdateTask extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                if (finishBy.isEmpty()) {
-                    myYear = 0;
-                    myMonth = 0;
-                    myDay = 0;
-                }
-                note.setTitle(title);
-                note.setText(text);
-                note.setDate(new GregorianCalendar(myYear, myMonth, myDay));
-                note.setYear(myYear);
-                note.setMonth(myMonth);
-                note.setDay(myDay);
-                note.setState(note.compareToToday(note.getDate()));
-                App.getInstance().getNoteList().update(note);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
-                startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
-            }
+        if (finishBy.isEmpty()) {
+            myYear = 0;
+            myMonth = 0;
+            myDay = 0;
         }
-
-        UpdateTask ut = new UpdateTask();
-        ut.execute();
+        note.setTitle(title);
+        note.setText(text);
+        note.setDate(new GregorianCalendar(myYear, myMonth, myDay));
+        note.setYear(myYear);
+        note.setMonth(myMonth);
+        note.setDay(myDay);
+        note.setState(note.compareToToday(note.getDate()));
+        disposable.add(App.getInstance().getNoteList().update(note)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.note_updated), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
+                    }
+                }));
     }
 
 
     private void deleteTask(final Note note) {
-        class DeleteTask extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                App.getInstance().getNoteList().delete(note);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
-                startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
-            }
-        }
-
-        DeleteTask dt = new DeleteTask();
-        dt.execute();
-
+        disposable.add(App.getInstance().getNoteList().delete(note)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.note_deleted), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UpdateNoteActivity.this, NoteListActivity.class));
+                    }
+                }));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
+    }
 }
