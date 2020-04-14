@@ -3,6 +3,7 @@ package com.example.appdiploma.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appdiploma.App;
 import com.example.appdiploma.R;
 import com.example.appdiploma.keystore.Keystore;
 
@@ -22,6 +22,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView circle1, circle2, circle3, circle4;
     private TextView hidden;
     private ArrayList<ImageView> circles = new ArrayList<>();
+    private Drawable filled;
+    private Drawable empty;
+    private boolean firstRun;
 
     private Keystore keystore;
 
@@ -84,9 +87,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int numberOfFilled = hidden.getText().length();
         for (int i = 0; i < circles.size(); i++) {
             if (i < numberOfFilled) {
-                circles.get(i).setBackground(App.getInstance().getFilled());
+                circles.get(i).setBackground(filled);
             } else {
-                circles.get(i).setBackground(App.getInstance().getEmpty());
+                circles.get(i).setBackground(empty);
             }
         }
     }
@@ -146,10 +149,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkFirstRun() {
-        if (App.getInstance().isFirstTime()) {
+        if (firstRun) {
             Intent intent = new Intent(this, PinEditActivity.class);
             startActivity(intent);
             finish();
         }
+    }
+
+    public void setFilled(Drawable filled) {
+        this.filled = filled;
+    }
+
+    public void setEmpty(Drawable empty) {
+        this.empty = empty;
+    }
+
+    public void setFirstRun(boolean firstRun) {
+        this.firstRun = firstRun;
     }
 }

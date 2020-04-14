@@ -39,6 +39,7 @@ public class App extends Application {
     private SharedPreferences launch;
     private Keystore keystore;
     private NoteDAO noteDAO;
+    private boolean firstRun;
 
     @Override
     public void onCreate() {
@@ -56,6 +57,7 @@ public class App extends Application {
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
         launch = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
+        firstRun = launch.getBoolean(getString(R.string.first_run_pref), true);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
         noteDAO = DatabaseClient
                 .getInstance(getApplicationContext())
@@ -67,6 +69,9 @@ public class App extends Application {
             @Override
             public void inject(LoginActivity component) {
                 component.setKeystore(keystore);
+                component.setEmpty(imgEmpty);
+                component.setFilled(imgFilled);
+                component.setFirstRun(firstRun);
             }
         });
         injectors.put(NoteListActivity.class, new Injector<NoteListActivity>() {
@@ -143,24 +148,12 @@ public class App extends Application {
         return instance;
     }
 
-    public Drawable getEmpty() {
-        return imgEmpty;
-    }
-
-    public Drawable getFilled() {
-        return imgFilled;
-    }
-
     public Context getContext() {
         return context;
     }
 
     public String getPinPref() {
         return pinPref.getString(getString(R.string.pin_pref), "");
-    }
-
-    public boolean isFirstTime() {
-        return launch.getBoolean(getString(R.string.first_run_pref), true);
     }
 
     public void setNotFirstTime() {
