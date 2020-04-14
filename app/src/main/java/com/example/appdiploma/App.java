@@ -37,7 +37,7 @@ public class App extends Application {
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
         launch = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
-        keystore = new SimpleKeystore();
+        keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
     }
 
     public static App getInstance() {
@@ -74,12 +74,6 @@ public class App extends Application {
 
     public String getPinPref() {
         return pinPref.getString(getString(R.string.pin_pref), "");
-    }
-
-    public void setPinPref(String newPin) {
-        SharedPreferences.Editor editor = pinPref.edit();
-        editor.putString(getString(R.string.pin_pref), newPin);
-        editor.commit();
     }
 
     public boolean isFirstTime() {

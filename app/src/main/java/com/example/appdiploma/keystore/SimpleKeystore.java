@@ -1,21 +1,25 @@
 package com.example.appdiploma.keystore;
 
-import com.example.appdiploma.App;
+import android.content.SharedPreferences;
 
 public class SimpleKeystore implements Keystore {
 
-    /*@Override
-    public boolean hasPin() {
-        return !App.getInstance().getPinPref().isEmpty();
-    }*/
+    private SharedPreferences preferences;
+
+    private String PIN;
+
+    public SimpleKeystore(SharedPreferences preferences, String PIN) {
+        this.preferences = preferences;
+        this.PIN = PIN;
+    }
 
     @Override
     public boolean checkPin(String pin) {
-        return App.getInstance().getPinPref().equals(pin);
+        return pin.equals(preferences.getString(PIN, null));
     }
 
     @Override
     public void saveNew(String pin) {
-        App.getInstance().setPinPref(pin);
+        preferences.edit().putString(PIN, pin).apply();
     }
 }
