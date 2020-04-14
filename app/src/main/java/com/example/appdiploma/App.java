@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.example.appdiploma.activities.AddNoteActivity;
 import com.example.appdiploma.activities.LoginActivity;
 import com.example.appdiploma.activities.NoteListActivity;
+import com.example.appdiploma.activities.PinEditActivity;
 import com.example.appdiploma.activities.UpdateNoteActivity;
 import com.example.appdiploma.keystore.Keystore;
 import com.example.appdiploma.keystore.SimpleKeystore;
@@ -36,10 +37,9 @@ public class App extends Application {
     private Drawable imgFilled;
     private Context context;
     private SharedPreferences pinPref;
-    private SharedPreferences launch;
+    private SharedPreferences firstRun;
     private Keystore keystore;
     private NoteDAO noteDAO;
-    private boolean firstRun;
 
     @Override
     public void onCreate() {
@@ -55,9 +55,9 @@ public class App extends Application {
         imgFilled = getDrawable(R.drawable.filled_48);
         pinPref = context.getSharedPreferences(
                 getString(R.string.pin_pref), Context.MODE_PRIVATE);
-        launch = context.getSharedPreferences(
+        firstRun = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
-        firstRun = launch.getBoolean(getString(R.string.first_run_pref), true);
+        //firstRun = launch.getBoolean(getString(R.string.first_run_pref), true);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
         noteDAO = DatabaseClient
                 .getInstance(getApplicationContext())
@@ -71,6 +71,13 @@ public class App extends Application {
                 component.setKeystore(keystore);
                 component.setEmpty(imgEmpty);
                 component.setFilled(imgFilled);
+                component.setFirstRun(firstRun);
+            }
+        });
+        injectors.put(PinEditActivity.class, new Injector<PinEditActivity>() {
+            @Override
+            public void inject(PinEditActivity component) {
+                component.setKeystore(keystore);
                 component.setFirstRun(firstRun);
             }
         });
@@ -144,28 +151,8 @@ public class App extends Application {
         });
     }
 
-    public static App getInstance() {
-        return instance;
-    }
-
     public Context getContext() {
         return context;
-    }
-
-    public String getPinPref() {
-        return pinPref.getString(getString(R.string.pin_pref), "");
-    }
-
-    public void setNotFirstTime() {
-        if (!getPinPref().equals("")) {
-            SharedPreferences.Editor editor = launch.edit();
-            editor.putBoolean(getString(R.string.first_run_pref), false);
-            editor.commit();
-        }
-    }
-
-    public Keystore getKeystore() {
-        return keystore;
     }
 
 }

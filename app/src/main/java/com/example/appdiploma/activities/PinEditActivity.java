@@ -3,20 +3,37 @@ package com.example.appdiploma.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.appdiploma.App;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
+import com.example.appdiploma.keystore.Keystore;
 
 public class PinEditActivity extends ToolbarActivity {
 
     private EditText pinInput;
+    private Keystore keystore;
+    private Context context;
+    private SharedPreferences firstRun;
+
+    public void setFirstRun(SharedPreferences firstRun) {
+        this.firstRun = firstRun;
+    }
+
+    public void setKeystore(Keystore keystore) {
+        this.keystore = keystore;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +68,14 @@ public class PinEditActivity extends ToolbarActivity {
                 String newPin = pinInput.getText().toString();
 
                 if (newPin.length() == 4) {
-                    App.getInstance().getKeystore().saveNew(newPin);
-                    App.getInstance().setNotFirstTime();
-                    Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
+                    keystore.saveNew(newPin);
+                    firstRun.edit().putBoolean(getString(R.string.first_run_pref), false).apply();
+                    Toast.makeText(context, getString(R.string.pin_edit_ok), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(PinEditActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     pinInput.setText("");
-                    Toast.makeText(App.getInstance().getContext(), getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.pin_edit_error), Toast.LENGTH_LONG).show();
                 }
                 return true;
             case android.R.id.home:

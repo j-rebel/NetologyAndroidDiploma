@@ -3,6 +3,7 @@ package com.example.appdiploma.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ArrayList<ImageView> circles = new ArrayList<>();
     private Drawable filled;
     private Drawable empty;
-    private boolean firstRun;
-
+    private SharedPreferences firstRun;
     private Keystore keystore;
 
     public void setKeystore(Keystore keystore) {
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void checkFirstRun() {
-        if (firstRun) {
+        if (firstRun.getBoolean(getString(R.string.first_run_pref), true)) {
             Intent intent = new Intent(this, PinEditActivity.class);
             startActivity(intent);
             finish();
@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.empty = empty;
     }
 
-    public void setFirstRun(boolean firstRun) {
+    public void setFirstRun(SharedPreferences firstRun) {
         this.firstRun = firstRun;
     }
 }
