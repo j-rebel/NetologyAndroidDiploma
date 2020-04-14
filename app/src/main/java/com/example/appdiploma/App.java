@@ -1,16 +1,25 @@
 package com.example.appdiploma;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 
+import com.example.appdiploma.activities.LoginActivity;
 import com.example.appdiploma.keystore.Keystore;
 import com.example.appdiploma.keystore.SimpleKeystore;
 import com.example.appdiploma.roomedRepository.DatabaseClient;
 import com.example.appdiploma.roomedRepository.NoteDAO;
 
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class App extends Application {
 
@@ -38,6 +47,54 @@ public class App extends Application {
         launch = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
+
+        final Map<Type, Injector> injectors = new HashMap<>();
+        injectors.put(LoginActivity.class, new Injector<LoginActivity>() {
+            @Override
+            public void inject(LoginActivity component) {
+                component.setKeystore(keystore);
+            }
+        });
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+                Injector injector = injectors.get(activity.getClass());
+                if (injector == null) return;
+                //noinspection unchecked
+                injector.inject(activity);
+            }
+
+            @Override
+            public void onActivityStarted(@NonNull Activity activity) {
+                // Do nothing
+            }
+
+            @Override
+            public void onActivityResumed(@NonNull Activity activity) {
+                // Do nothing
+            }
+
+            @Override
+            public void onActivityPaused(@NonNull Activity activity) {
+                // Do nothing
+            }
+
+            @Override
+            public void onActivityStopped(@NonNull Activity activity) {
+                // Do nothing
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+                // Do nothing
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+                // Do nothing
+            }
+        });
     }
 
     public static App getInstance() {
