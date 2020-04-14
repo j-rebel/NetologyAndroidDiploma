@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.example.appdiploma.activities.AddNoteActivity;
 import com.example.appdiploma.activities.LoginActivity;
+import com.example.appdiploma.activities.NoteListActivity;
+import com.example.appdiploma.activities.UpdateNoteActivity;
 import com.example.appdiploma.keystore.Keystore;
 import com.example.appdiploma.keystore.SimpleKeystore;
 import com.example.appdiploma.roomedRepository.DatabaseClient;
@@ -32,6 +35,7 @@ public class App extends Application {
     private SharedPreferences pinPref;
     private SharedPreferences launch;
     private Keystore keystore;
+    private NoteDAO noteDAO;
 
     @Override
     public void onCreate() {
@@ -47,12 +51,34 @@ public class App extends Application {
         launch = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
+        noteDAO = DatabaseClient
+                .getInstance(getApplicationContext())
+                .getAppDatabase()
+                .noteDAO();
 
         final Map<Type, Injector> injectors = new HashMap<>();
         injectors.put(LoginActivity.class, new Injector<LoginActivity>() {
             @Override
             public void inject(LoginActivity component) {
                 component.setKeystore(keystore);
+            }
+        });
+        injectors.put(NoteListActivity.class, new Injector<NoteListActivity>() {
+            @Override
+            public void inject(NoteListActivity component) {
+                component.setNoteDAO(noteDAO);
+            }
+        });
+        injectors.put(AddNoteActivity.class, new Injector<AddNoteActivity>() {
+            @Override
+            public void inject(AddNoteActivity component) {
+                component.setNoteDAO(noteDAO);
+            }
+        });
+        injectors.put(UpdateNoteActivity.class, new Injector<UpdateNoteActivity>() {
+            @Override
+            public void inject(UpdateNoteActivity component) {
+                component.setNoteDAO(noteDAO);
             }
         });
 
@@ -149,10 +175,7 @@ public class App extends Application {
         return keystore;
     }
 
-    public NoteDAO getNoteList() {
-        return DatabaseClient
-                .getInstance(getApplicationContext())
-                .getAppDatabase()
-                .noteDAO();
+    public NoteDAO getNoteDAO() {
+        return noteDAO;
     }
 }

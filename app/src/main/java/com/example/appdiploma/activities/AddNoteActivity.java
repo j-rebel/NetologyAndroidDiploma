@@ -25,6 +25,7 @@ import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
+import com.example.appdiploma.roomedRepository.NoteDAO;
 
 public class AddNoteActivity extends ToolbarActivity {
 
@@ -36,6 +37,11 @@ public class AddNoteActivity extends ToolbarActivity {
     int myMonth = App.getInstance().getMonth();
     int myDay = App.getInstance().getDay();
     private CompositeDisposable disposable = new CompositeDisposable();
+    private NoteDAO noteDAO;
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -144,18 +150,17 @@ public class AddNoteActivity extends ToolbarActivity {
         Note note = new Note(title, text, myYear, myMonth, myDay);
 
         disposable.add(
-                App.getInstance()
-                        .getNoteList()
-                        .insert(note)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action() {
-                            @Override
-                            public void run() {
-                                startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
-                                Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
-                            }
-                        })
+                noteDAO
+                .insert(note)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getApplicationContext(), NoteListActivity.class));
+                        Toast.makeText(getApplicationContext(), getString(R.string.new_note_added), Toast.LENGTH_LONG).show();
+                    }
+                })
         );
     }
 

@@ -6,11 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.NoteAdapter;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
+import com.example.appdiploma.roomedRepository.NoteDAO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -28,6 +28,11 @@ public class NoteListActivity extends ToolbarActivity {
     private FloatingActionButton buttonAddTask;
     private RecyclerView recyclerView;
     private CompositeDisposable disposable = new CompositeDisposable();
+    private NoteDAO noteDAO;
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +83,7 @@ public class NoteListActivity extends ToolbarActivity {
     }
 
     private void getNotes() {
-        disposable.add(App.getInstance().
-                getNoteList()
+        disposable.add(noteDAO
                 .getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

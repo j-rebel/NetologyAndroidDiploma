@@ -27,6 +27,7 @@ import com.example.appdiploma.App;
 import com.example.appdiploma.Note;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
+import com.example.appdiploma.roomedRepository.NoteDAO;
 
 import java.util.GregorianCalendar;
 
@@ -41,6 +42,11 @@ public class UpdateNoteActivity extends ToolbarActivity {
     int myMonth = App.getInstance().getMonth();
     int myDay = App.getInstance().getDay();
     private CompositeDisposable disposable = new CompositeDisposable();
+    private NoteDAO noteDAO;
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
 
     DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
 
@@ -200,7 +206,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
         note.setMonth(myMonth);
         note.setDay(myDay);
         note.setState(note.compareToToday(note.getDate()));
-        disposable.add(App.getInstance().getNoteList().update(note)
+        disposable.add(noteDAO.update(note)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action() {
@@ -214,7 +220,7 @@ public class UpdateNoteActivity extends ToolbarActivity {
 
 
     private void deleteTask(final Note note) {
-        disposable.add(App.getInstance().getNoteList().delete(note)
+        disposable.add(noteDAO.delete(note)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action() {
