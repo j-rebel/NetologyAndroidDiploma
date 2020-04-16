@@ -20,7 +20,7 @@
     <string name="dialog_sure">Are you sure, you want to delete this note?</string>
     <string name="dialog_no">No</string>
     <string name="dialog_yes">Yes</string>
-    <string name="extra_label">task</string>
+    <string name="extra_label" translatable="false">task</string>
     <string name="date_divider">/</string>
     <string name="login_title">Enter PIN</string>
     <string name="btn_1">1</string>
@@ -35,8 +35,8 @@
     <string name="btn_0">0</string>
     <string name="btn_reset">С</string>
     <string name="circle_desc">pin circle</string>
-    <string name="pin_pref">pin</string>
-    <string name="first_run_pref">firstRun</string>
+    <string name="pin_pref" translatable="false">pin</string>
+    <string name="first_run_pref" translatable="false">firstRun</string>
     <string name="pin_error">PIN doesn\'t match!</string>
     <string name="pin_edit_title">Enter new PIN</string>
     <string name="pin_edit_error">Incorrect PIN</string>
