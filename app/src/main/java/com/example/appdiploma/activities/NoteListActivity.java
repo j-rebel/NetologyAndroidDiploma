@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.example.appdiploma.Note;
 import com.example.appdiploma.NoteAdapter;
-import com.example.appdiploma.NoteDiffUtilCallback;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
 import com.example.appdiploma.roomedRepository.NoteDAO;
@@ -17,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
