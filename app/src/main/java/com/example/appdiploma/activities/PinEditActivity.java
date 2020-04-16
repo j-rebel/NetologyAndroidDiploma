@@ -48,7 +48,7 @@ public class PinEditActivity extends ToolbarActivity {
     }
 
     public void initToolbar() {
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.included_bar);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);

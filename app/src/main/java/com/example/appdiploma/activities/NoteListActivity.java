@@ -60,7 +60,7 @@ public class NoteListActivity extends ToolbarActivity {
     }
 
     public void initToolbar() {
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.included_bar);
         setSupportActionBar(myToolbar);
         myToolbar.setTitle(R.string.note_list_title);
     }
