@@ -101,4 +101,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
             mCtx.startActivity(intent);
         }
     }
+
+    public List<Note> getNoteList() {
+        return noteList;
+    }
 }
