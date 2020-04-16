@@ -11,71 +11,61 @@
         android:id="@+id/included_bar"
         layout="@layout/activity_toolbar" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="false"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".activities.NoteListActivity">
+        app:layout_constraintTop_toBottomOf="@+id/included_bar"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="false"
-            android:orientation="vertical"
-            android:padding="16dp"
-            tools:ignore="UselessParent">
+            android:drawableStart="@drawable/ic_edit"
+            android:gravity="top"
+            android:hint="@string/hint_title"
+            android:inputType="text"
+            tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_edit"
-                android:gravity="top"
-                android:hint="@string/hint_title"
-                android:inputType="text"
-                tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_edit"
+            android:gravity="top"
+            android:hint="@string/hint_text"
+            android:inputType="text"
+            android:lines="7"
+            tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_edit"
-                android:gravity="top"
-                android:hint="@string/hint_text"
-                android:inputType="text"
-                android:lines="7"
-                tools:ignore="Autofill" />
+        <CheckBox
+            android:id="@+id/hasDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_deadline" />
 
-            <CheckBox
-                android:id="@+id/hasDeadline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/checkbox_deadline" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_date_white"
+            android:drawableTint="@color/colorWhite"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="@string/field_deadline"
+            android:padding="10dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:drawableStart="@drawable/ic_date_white"
-                android:drawableTint="@color/colorWhite"
-                android:gravity="center_horizontal|center_vertical"
-                android:hint="@string/field_deadline"
-                android:padding="10dp"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
