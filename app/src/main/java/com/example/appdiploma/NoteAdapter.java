@@ -7,20 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appdiploma.activities.UpdateNoteActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolder> {
 
     private Context mCtx;
-    private List<Note> noteList;
+    private List<Note> noteList = new ArrayList<>();
 
-    public NoteAdapter(Context mCtx, List<Note> noteList) {
+    public NoteAdapter(Context mCtx) {
         this.mCtx = mCtx;
-        this.noteList = noteList;
     }
 
     @Override
@@ -104,5 +105,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.TasksViewHolde
 
     public List<Note> getNoteList() {
         return noteList;
+    }
+
+    public void setNoteList(List<Note> newNoteList) {
+        NoteDiffUtilCallback noteDiffUtilCallback =
+                new NoteDiffUtilCallback(noteList, newNoteList);
+        DiffUtil.DiffResult noteDiffResult = DiffUtil.calculateDiff(noteDiffUtilCallback);
+        noteList.clear();
+        noteList.addAll(newNoteList);
+        noteDiffResult.dispatchUpdatesTo(this);
     }
 }

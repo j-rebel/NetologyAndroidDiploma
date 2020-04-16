@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.appdiploma.Note;
 import com.example.appdiploma.NoteAdapter;
+import com.example.appdiploma.NoteDiffUtilCallback;
 import com.example.appdiploma.R;
 import com.example.appdiploma.ToolbarActivity;
 import com.example.appdiploma.roomedRepository.NoteDAO;
@@ -16,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,6 +31,7 @@ public class NoteListActivity extends ToolbarActivity {
     private RecyclerView recyclerView;
     private CompositeDisposable disposable = new CompositeDisposable();
     private NoteDAO noteDAO;
+    private NoteAdapter adapter = new NoteAdapter(NoteListActivity.this);
 
     public void setNoteDAO(NoteDAO noteDAO) {
         this.noteDAO = noteDAO;
@@ -46,6 +49,7 @@ public class NoteListActivity extends ToolbarActivity {
     public void initViews() {
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
         buttonAddTask = findViewById(R.id.floating_button_add);
         buttonAddTask.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +94,7 @@ public class NoteListActivity extends ToolbarActivity {
                 .subscribe(new Consumer<List<Note>>() {
                     @Override
                     public void accept(List<Note> notes) {
-                        NoteAdapter adapter = new NoteAdapter(NoteListActivity.this, notes);
-                        recyclerView.setAdapter(adapter);
+                        adapter.setNoteList(notes);
                     }
                 }));
     }
