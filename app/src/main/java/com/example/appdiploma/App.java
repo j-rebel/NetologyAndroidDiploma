@@ -14,7 +14,7 @@ import com.example.appdiploma.activities.PinEditActivity;
 import com.example.appdiploma.activities.UpdateNoteActivity;
 import com.example.appdiploma.keystore.Keystore;
 import com.example.appdiploma.keystore.SimpleKeystore;
-import com.example.appdiploma.roomedRepository.DatabaseClient;
+import com.example.appdiploma.roomedRepository.AppDatabase;
 import com.example.appdiploma.roomedRepository.NoteDAO;
 
 import java.lang.reflect.Type;
@@ -24,6 +24,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Room;
 
 public class App extends Application {
 
@@ -39,7 +40,9 @@ public class App extends Application {
     private SharedPreferences pinPref;
     private SharedPreferences firstRun;
     private Keystore keystore;
+    private AppDatabase appDatabase;
     private NoteDAO noteDAO;
+
 
     @Override
     public void onCreate() {
@@ -58,10 +61,8 @@ public class App extends Application {
         firstRun = context.getSharedPreferences(
                 getString(R.string.first_run_pref), Context.MODE_PRIVATE);
         keystore = new SimpleKeystore(pinPref, getString(R.string.pin_pref));
-        noteDAO = DatabaseClient
-                .getInstance(getApplicationContext())
-                .getAppDatabase()
-                .noteDAO();
+        appDatabase = Room.databaseBuilder(this, AppDatabase.class, "Notes").fallbackToDestructiveMigration().build();
+        noteDAO = appDatabase.noteDAO();
 
         final Map<Type, Injector> injectors = new HashMap<>();
         injectors.put(LoginActivity.class, new Injector<LoginActivity>() {
